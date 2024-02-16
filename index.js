@@ -1,7 +1,7 @@
 const fs = require("fs");
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = 3000 || process.env.PORT;
 const jose = require("node-jose");
 const ms = require("ms");
 
