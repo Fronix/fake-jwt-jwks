@@ -40,6 +40,7 @@ app.post("/tokens", async (req, res) => {
 
   const payload = JSON.stringify({
     ...incPayload,
+    issuer: "https://testing.com",
     exp: Math.floor((Date.now() + ms("100d")) / 1000),
     iat: Math.floor(Date.now() / 1000),
   });
