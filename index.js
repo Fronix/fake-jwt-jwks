@@ -15,6 +15,10 @@ keyStore.generate("RSA", 2048, { alg: "RS256", use: "sig" }).then((result) => {
 });
 
 app.use(express.json());
+app.get("/", async (req, res) => {
+  res.send("Endpoints: /jwks (GET), /tokens (POST)");
+});
+
 app.get("/jwks", async (req, res) => {
   const ks = fs.readFileSync("keys.json");
 
