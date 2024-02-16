@@ -20,7 +20,7 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/jwks", async (req, res) => {
-  const ks = fs.readFileSync("keys.json");
+  const ks = fs.readFileSync("Keys.json");
 
   const keyStore = await jose.JWK.asKeyStore(ks.toString());
 
@@ -30,7 +30,7 @@ app.get("/jwks", async (req, res) => {
 app.post("/tokens", async (req, res) => {
   const incPayload = req.body;
 
-  const JWKeys = fs.readFileSync("keys.json");
+  const JWKeys = fs.readFileSync("Keys.json");
 
   const keyStore = await jose.JWK.asKeyStore(JWKeys.toString());
 
