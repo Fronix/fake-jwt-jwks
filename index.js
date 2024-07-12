@@ -7,6 +7,35 @@ const ms = require("ms");
 
 const keyStore = jose.JWK.createKeyStore();
 
+const htmlString = `
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fake JWT</title>
+  </head>
+  <body>
+      <h1>This is a fake JWT and JWKS app</h1>
+      <h2>Endpoints:</h2>
+      <ul>
+        <li>/jwks <i>GET</i></li>
+        <li>/tokens <i>POST</i>
+        <cite style="display: block;">You can send your own JWT data as json for extra faking</cite>
+        <p>Example:</p>
+        <code>
+        curl -X POST https://fake-jwt.fronix.io \\
+         -H "Content-Type: application/json" \\
+         -d '{
+               "somedata": "blabala",
+               "userid": 1234,
+               "group": "admin, developer"
+             }'
+        </code>
+        </li>
+      </ul>
+  </body>
+</html>
+`;
+
 keyStore.generate("RSA", 2048, { alg: "RS256", use: "sig" }).then((result) => {
   fs.writeFileSync(
     "Keys.json",
@@ -16,7 +45,7 @@ keyStore.generate("RSA", 2048, { alg: "RS256", use: "sig" }).then((result) => {
 
 app.use(express.json());
 app.get("/", async (req, res) => {
-  res.send("Endpoints: /jwks (GET), /tokens (POST)");
+  res.send(htmlString);
 });
 
 app.get("/jwks", async (req, res) => {
